@@ -289,7 +289,7 @@ public class AdminService extends Service {
 		int choice;
 		do {
 			choice = UI.adminChooseIfChangeORAdd("author");
-
+			book = bookDAO.readBookWithID("bookId", book.getBookId().toString()).get(0);
 			if (choice > 3) {
 				break;
 			}
@@ -300,6 +300,7 @@ public class AdminService extends Service {
 
 					continue;
 				}
+			
 				// choose the new one
 				Author newauthor = UI.uiShowGenericList(adao.readAll(), "author", true);
 				if (newauthor == null) {
@@ -336,6 +337,7 @@ public class AdminService extends Service {
 
 						continue;
 					}
+					System.out.println("id:"+author.getAuthorId()+" Name: "+author.getAuthorName());
 					// link up book and author
 					bookDAO.addBookAuthors(book.getBookId(), author.getAuthorId());
 
@@ -370,7 +372,7 @@ public class AdminService extends Service {
 		int choice;
 		// change Book Genre
 		do {
-
+			book = bookDAO.readBookWithID("bookId", book.getBookId().toString()).get(0);
 			choice = UI.adminChooseIfChangeORAdd("genre");
 			if (choice > 3) {
 				break;
@@ -431,6 +433,7 @@ public class AdminService extends Service {
 
 		int choice;
 		do {
+			book = bookDAO.readBookWithID("bookId", book.getBookId().toString()).get(0);
 			choice = UI.AdminUpdateChoice("library branch");
 			if (choice > 2) {
 				break;
@@ -508,7 +511,7 @@ public class AdminService extends Service {
 			}
 			break;
 
-		case 2: // book publisher
+		case 5: // book publisher
 			// change Book publisher
 			if (!changePublisher(book)) {
 				conn.rollback();
@@ -516,19 +519,19 @@ public class AdminService extends Service {
 			}
 			break;
 
-		case 3: // author
+		case 2: // author
 			if (!changeAuthor(book)) {
 				conn.rollback();
 				return false;
 			}
 			break;
-		case 4: // genre
+		case 3: // genre
 			if (!changeGenre(book)) {
 				conn.rollback();
 				return false;
 			}
 			break;
-		case 5: // library branch
+		case 4: // library branch
 			if (!changeBranch(book)) {
 				conn.rollback();
 				return false;

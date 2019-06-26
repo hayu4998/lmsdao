@@ -210,8 +210,9 @@ public class TextUI {
 				.append("\n\t2)Author")
 				.append("\n\t3)Genre")
 				.append("\n\t4)LibraryBranch")
-				.append("\n\t5)Quit to previous");
+				.append("\n\t5)Publisher")
+				.append("\n\t6)Quit to previous");
 		
-		return inputWCheck(5,1,s);
+		return inputWCheck(6,1,s);
 	}
 }
